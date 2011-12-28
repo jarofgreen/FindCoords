@@ -17,19 +17,18 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
-	LocationListener locationListener;
-
-	Location currentLocation;
-	Location desiredLocation;
+	private LocationManager locationManager;
+	private Location currentLocation;
+	private Location desiredLocation;
 	
-	TextView tvCurrentLat;
-	TextView tvCurrentLng;
-	TextView tvCurrentAccuracy;
-	TextView tvCurrentBearing;
-	EditText etDesiredLat;
-	EditText etDesiredLng;
-	TextView tvDistance;
-	TextView tvBearing;
+	private TextView tvCurrentLat;
+	private TextView tvCurrentLng;
+	private TextView tvCurrentAccuracy;
+	private TextView tvCurrentBearing;
+	private EditText etDesiredLat;
+	private EditText etDesiredLng;
+	private TextView tvDistance;
+	private TextView tvBearing;
 	
 	private SensorManager mSensorManager;
 	private Sensor mSensor;
@@ -43,7 +42,20 @@ public class MainActivity extends Activity {
 		
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
-	};	
+	};
+	
+	private final LocationListener locationListener = new LocationListener() {
+		public void onLocationChanged(Location location) {
+			currentLocation = location;
+			update();
+		}
+		
+		public void onStatusChanged(String provider, int status, Bundle extras) {}
+		
+		public void onProviderEnabled(String provider) {}
+		
+		public void onProviderDisabled(String provider) {}
+	};
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,22 +84,7 @@ public class MainActivity extends Activity {
 		tvDistance = (TextView) findViewById(R.id.desiredDistance);
 		tvBearing = (TextView) findViewById(R.id.desiredBearing);
 		
-		locationListener = new LocationListener() {
-			public void onLocationChanged(Location location) {
-				currentLocation = location;
-				update();
-			}
-			
-			public void onStatusChanged(String provider, int status, Bundle extras) {}
-			
-			public void onProviderEnabled(String provider) {}
-			
-			public void onProviderDisabled(String provider) {}
-		};
-		
-		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-		currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);		
 		
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION); 
@@ -97,15 +94,17 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {
-        super.onResume();
-        mSensorManager.registerListener(mListener, mSensor,SensorManager.SENSOR_DELAY_GAME);
-        
+		super.onResume();
+		mSensorManager.registerListener(mListener, mSensor,SensorManager.SENSOR_DELAY_GAME);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);        
     }
 
     @Override
     protected void onStop() {
-     mSensorManager.unregisterListener(mListener);
-        super.onStop();
+		locationManager.removeUpdates(locationListener);
+		mSensorManager.unregisterListener(mListener);
+		super.onStop();
     }
     	
 	
