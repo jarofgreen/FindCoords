@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Desired Lat" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Desired Lng" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Lng" />
+
+   <TextView
+        android:id="@+id/currentLng"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="shrug" />
+        
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Lat" />
+
+   <TextView
+        android:id="@+id/currentLat"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="strug" />
+   
+</LinearLayout>
