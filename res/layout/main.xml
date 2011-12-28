@@ -48,6 +48,18 @@
         android:layout_height="wrap_content"
         android:text="shrug" />
 
+   <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Bearing" />
+
+   <TextView
+        android:id="@+id/currentBearing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="shrug" />
+   
+   
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

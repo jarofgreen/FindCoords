@@ -2,6 +2,10 @@ package uk.co.jarofgreen.FindCoords;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,10 +25,25 @@ public class MainActivity extends Activity {
 	TextView tvCurrentLat;
 	TextView tvCurrentLng;
 	TextView tvCurrentAccuracy;
+	TextView tvCurrentBearing;
 	EditText etDesiredLat;
 	EditText etDesiredLng;
 	TextView tvDistance;
 	TextView tvBearing;
+	
+	private SensorManager mSensorManager;
+	private Sensor mSensor;
+	private float currentBearing = 0;
+	
+	private final SensorEventListener mListener = new SensorEventListener() {
+		public void onSensorChanged(SensorEvent event) {
+			currentBearing = event.values[0];
+			update();
+		}
+		
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		}
+	};	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +53,7 @@ public class MainActivity extends Activity {
 		tvCurrentLat = (TextView) findViewById(R.id.currentLat);
 		tvCurrentLng = (TextView) findViewById(R.id.currentLng);
 		tvCurrentAccuracy = (TextView) findViewById(R.id.currentAccuracy);
+		tvCurrentBearing =  (TextView) findViewById(R.id.currentBearing);
 		
 		etDesiredLat = (EditText) findViewById(R.id.desiredLat);
 		etDesiredLat.addTextChangedListener(new TextWatcher(){
@@ -67,11 +87,28 @@ public class MainActivity extends Activity {
 		
 		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-		
 		currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		
+		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION); 
+		
 		update();
 	}
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mListener, mSensor,SensorManager.SENSOR_DELAY_GAME);
+        
+    }
+
+    @Override
+    protected void onStop() {
+     mSensorManager.unregisterListener(mListener);
+        super.onStop();
+    }
+    	
+	
 	public void updateDesiredLocation() {
 		try { 
 			double lat = Double.parseDouble(etDesiredLat.getText().toString());
@@ -86,6 +123,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void update() {
+		
+		tvCurrentBearing.setText(Float.toString(currentBearing));
 		
 		if (currentLocation instanceof Location) {
 					
