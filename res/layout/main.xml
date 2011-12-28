@@ -9,11 +9,23 @@
         android:layout_height="wrap_content"
         android:text="Desired Lat" />
 
+    <EditText
+        android:id="@+id/desiredLat"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"/>
+    
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Desired Lng" />
 
+    <EditText
+        android:id="@+id/desiredLng"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"/>
+            
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -34,6 +46,18 @@
         android:id="@+id/currentLat"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="strug" />
+        android:text="shrug" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance (m)" />
+
+   <TextView
+        android:id="@+id/desiredDistance"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="shrug" />
+   
    
 </LinearLayout>
