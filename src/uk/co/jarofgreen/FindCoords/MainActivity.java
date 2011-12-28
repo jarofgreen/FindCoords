@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 	EditText etDesiredLat;
 	EditText etDesiredLng;
 	TextView tvDistance;
+	TextView tvBearing;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class MainActivity extends Activity {
 		}); 
 		
 		tvDistance = (TextView) findViewById(R.id.desiredDistance);
+		tvBearing = (TextView) findViewById(R.id.desiredBearing);
 		
 		locationListener = new LocationListener() {
 			public void onLocationChanged(Location location) {
@@ -96,8 +98,12 @@ public class MainActivity extends Activity {
 				float distance = currentLocation.distanceTo(desiredLocation);
 				tvDistance.setText(Float.toString(distance));
 				
+				float bearing = currentLocation.bearingTo(desiredLocation) ;
+				tvBearing.setText(Float.toString(bearing));
+				
 			} else {
 				tvDistance.setText("destination not parsed");
+				tvBearing.setText("destination not parsed");
 			}
 			
 			
@@ -107,6 +113,7 @@ public class MainActivity extends Activity {
 			tvCurrentLng.setText("dunno");
 			
 			tvDistance.setText("dunno");
+			tvBearing.setText("dunno");
 			
 		}
 		
