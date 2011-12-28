@@ -14,6 +14,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -158,30 +159,43 @@ public class MainActivity extends Activity {
 			tvCurrentAccuracy.setText(Float.toString(currentAccuracy));
 			
 			if (desiredLocation instanceof Location) {
-				
-				float distance = currentLocation.distanceTo(desiredLocation);
-				tvDistance.setText(Float.toString(distance));
-				
+						
 				float bearing = currentLocation.bearingTo(desiredLocation) ;
 				tvBearing.setText(Float.toString(bearing));
+
+				float distance = currentLocation.distanceTo(desiredLocation);
+					
 				
-				float bearingRelative = bearing - currentBearing;
-				while (bearingRelative < 0) bearingRelative =  bearingRelative + 360;
-				while (bearingRelative > 360) bearingRelative =  bearingRelative - 360;
-				if (bearingRelative <= 22) {
-					imgBearing.setImageBitmap(compassImageNorth);
-				} else if (22 < bearingRelative  && bearingRelative <= 68) {
-					imgBearing.setImageBitmap(compassImageNorthEast);
-				} else if (68 < bearingRelative && bearingRelative <= 135) {
-					imgBearing.setImageBitmap(compassImageEast);
-				} else if (138 < bearingRelative && bearingRelative <= 225) {
-					imgBearing.setImageBitmap(compassImageSouth);
-				} else if (225 < bearingRelative && bearingRelative <= 295) {
-					imgBearing.setImageBitmap(compassImageWest);
-				} else if (295 < bearingRelative && bearingRelative <= 338) {
-					imgBearing.setImageBitmap(compassImageNorthWest);
-				} else if (338 < bearingRelative) {
-					imgBearing.setImageBitmap(compassImageNorth);
+				if (distance > 1) {
+					tvDistance.setText(Float.toString(distance));
+					float bearingRelative = bearing - currentBearing;
+					while (bearingRelative < 0) bearingRelative =  bearingRelative + 360;
+					while (bearingRelative > 360) bearingRelative =  bearingRelative - 360;
+					if (bearingRelative <= 22) {
+						imgBearing.setImageBitmap(compassImageNorth);
+						imgBearing.setVisibility(View.VISIBLE);
+					} else if (22 < bearingRelative  && bearingRelative <= 68) {
+						imgBearing.setImageBitmap(compassImageNorthEast);
+						imgBearing.setVisibility(View.VISIBLE);
+					} else if (68 < bearingRelative && bearingRelative <= 135) {
+						imgBearing.setImageBitmap(compassImageEast);
+						imgBearing.setVisibility(View.VISIBLE);
+					} else if (138 < bearingRelative && bearingRelative <= 225) {
+						imgBearing.setImageBitmap(compassImageSouth);
+						imgBearing.setVisibility(View.VISIBLE);
+					} else if (225 < bearingRelative && bearingRelative <= 295) {
+						imgBearing.setImageBitmap(compassImageWest);
+						imgBearing.setVisibility(View.VISIBLE);
+					} else if (295 < bearingRelative && bearingRelative <= 338) {
+						imgBearing.setImageBitmap(compassImageNorthWest);
+						imgBearing.setVisibility(View.VISIBLE);
+					} else if (338 < bearingRelative) {
+						imgBearing.setImageBitmap(compassImageNorth);
+						imgBearing.setVisibility(View.VISIBLE);
+					}
+				} else {
+					tvDistance.setText("Less than 1");
+					imgBearing.setVisibility(View.INVISIBLE);
 				}
 				
 				
