@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 	
 	TextView tvCurrentLat;
 	TextView tvCurrentLng;
+	TextView tvCurrentAccuracy;
 	EditText etDesiredLat;
 	EditText etDesiredLng;
 	TextView tvDistance;
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
 		
 		tvCurrentLat = (TextView) findViewById(R.id.currentLat);
 		tvCurrentLng = (TextView) findViewById(R.id.currentLng);
+		tvCurrentAccuracy = (TextView) findViewById(R.id.currentAccuracy);
 		
 		etDesiredLat = (EditText) findViewById(R.id.desiredLat);
 		etDesiredLat.addTextChangedListener(new TextWatcher(){
@@ -93,6 +95,9 @@ public class MainActivity extends Activity {
 			double currentLng = currentLocation.getLongitude();
 			tvCurrentLng.setText(Double.toString(currentLng));
 
+			float currentAccuracy = currentLocation.getAccuracy();
+			tvCurrentAccuracy.setText(Float.toString(currentAccuracy));
+			
 			if (desiredLocation instanceof Location) {
 				
 				float distance = currentLocation.distanceTo(desiredLocation);
@@ -111,7 +116,7 @@ public class MainActivity extends Activity {
 
 			tvCurrentLat.setText("dunno");
 			tvCurrentLng.setText("dunno");
-			
+			tvCurrentAccuracy.setText("dunno");
 			tvDistance.setText("dunno");
 			tvBearing.setText("dunno");
 			

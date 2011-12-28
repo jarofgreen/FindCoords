@@ -36,7 +36,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="shrug" />
-        
+   
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -47,7 +47,18 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="shrug" />
-        
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Accurary (m)" />
+
+   <TextView
+        android:id="@+id/currentAccuracy"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="shrug" />
+                 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
