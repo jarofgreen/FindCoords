@@ -2,6 +2,8 @@ package uk.co.jarofgreen.FindCoords;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -29,6 +32,16 @@ public class MainActivity extends Activity {
 	private EditText etDesiredLng;
 	private TextView tvDistance;
 	private TextView tvBearing;
+	
+	private ImageView imgBearing;
+	private Bitmap compassImageNorth;
+	private Bitmap compassImageNorthEast;
+	private Bitmap compassImageNorthWest;
+	private Bitmap compassImageEast;
+	private Bitmap compassImageWest;
+	private Bitmap compassImageSouth;
+
+
 	
 	private SensorManager mSensorManager;
 	private Sensor mSensor;
@@ -89,6 +102,14 @@ public class MainActivity extends Activity {
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION); 
 		
+		imgBearing = (ImageView) findViewById(R.id.bearing);
+		compassImageNorth = BitmapFactory.decodeResource(getResources(), R.drawable.compass_n);
+		compassImageNorthEast = BitmapFactory.decodeResource(getResources(), R.drawable.compass_ne);
+		compassImageNorthWest = BitmapFactory.decodeResource(getResources(), R.drawable.compass_nw);
+		compassImageEast = BitmapFactory.decodeResource(getResources(), R.drawable.compass_e);
+		compassImageWest = BitmapFactory.decodeResource(getResources(), R.drawable.compass_w);
+		compassImageSouth = BitmapFactory.decodeResource(getResources(), R.drawable.compass_s);
+		
 		update();
 	}
 
@@ -143,6 +164,26 @@ public class MainActivity extends Activity {
 				
 				float bearing = currentLocation.bearingTo(desiredLocation) ;
 				tvBearing.setText(Float.toString(bearing));
+				
+				float bearingRelative = bearing - currentBearing;
+				while (bearingRelative < 0) bearingRelative =  bearingRelative + 360;
+				while (bearingRelative > 360) bearingRelative =  bearingRelative - 360;
+				if (bearingRelative <= 22) {
+					imgBearing.setImageBitmap(compassImageNorth);
+				} else if (22 < bearingRelative  && bearingRelative <= 68) {
+					imgBearing.setImageBitmap(compassImageNorthEast);
+				} else if (68 < bearingRelative && bearingRelative <= 135) {
+					imgBearing.setImageBitmap(compassImageEast);
+				} else if (138 < bearingRelative && bearingRelative <= 225) {
+					imgBearing.setImageBitmap(compassImageSouth);
+				} else if (225 < bearingRelative && bearingRelative <= 295) {
+					imgBearing.setImageBitmap(compassImageWest);
+				} else if (295 < bearingRelative && bearingRelative <= 338) {
+					imgBearing.setImageBitmap(compassImageNorthWest);
+				} else if (338 < bearingRelative) {
+					imgBearing.setImageBitmap(compassImageNorth);
+				}
+				
 				
 			} else {
 				tvDistance.setText("destination not parsed");

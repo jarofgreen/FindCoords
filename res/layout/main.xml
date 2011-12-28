@@ -94,6 +94,9 @@
         android:layout_height="wrap_content"
         android:text="shrug" />
    
+  <ImageView android:id="@+id/bearing"
+       android:layout_width="fill_parent"
+       android:layout_height="100px" /> 
    
    
 </LinearLayout>
