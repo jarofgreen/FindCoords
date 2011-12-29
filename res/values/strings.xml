@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">FindCoords</string>
 	<string name="map_menu_item">Show On Map</string>
+	<string name="current_menu_item">Set to current location</string>
 </resources>

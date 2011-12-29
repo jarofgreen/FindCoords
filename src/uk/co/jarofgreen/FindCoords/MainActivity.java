@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -154,6 +155,15 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(Intent.ACTION_VIEW,  Uri.parse(uri));
             startActivity(intent);
             return true;
+        case R.id.current_menu_item:
+        	if (currentLocation instanceof Location) {
+        		etDesiredLat.setText(Double.toString(currentLocation.getLatitude()));
+        		etDesiredLng.setText(Double.toString(currentLocation.getLongitude()));
+        		updateDesiredLocation(); // which also calls update()
+        	} else {
+        		Toast.makeText(this, "Current Location Not Known", Toast.LENGTH_SHORT).show();
+        	}
+        	return true;
         default:
             return super.onOptionsItemSelected(item);
         }

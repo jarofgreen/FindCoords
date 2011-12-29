@@ -25,6 +25,7 @@ public final class R {
         public static final int currentBearing=0x7f060004;
         public static final int currentLat=0x7f060002;
         public static final int currentLng=0x7f060003;
+        public static final int current_menu_item=0x7f06000a;
         public static final int desiredBearing=0x7f060007;
         public static final int desiredDistance=0x7f060006;
         public static final int desiredLat=0x7f060000;
@@ -39,6 +40,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int current_menu_item=0x7f040002;
         public static final int map_menu_item=0x7f040001;
     }
 }
