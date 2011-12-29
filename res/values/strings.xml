@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FindCoords</string>
-
+	<string name="map_menu_item">Show On Map</string>
 </resources>

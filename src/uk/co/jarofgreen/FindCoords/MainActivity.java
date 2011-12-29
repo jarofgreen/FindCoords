@@ -2,6 +2,7 @@ package uk.co.jarofgreen.FindCoords;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
@@ -11,9 +12,13 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -129,6 +134,30 @@ public class MainActivity extends Activity {
 		super.onStop();
     }
     	
+    
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.map_menu_item:
+        	String uri = "geo:"+Double.toString(desiredLocation.getLatitude())
+        	    +","+Double.toString(desiredLocation.getLongitude())
+        	    +"?q="+Double.toString(desiredLocation.getLatitude())
+        	    +","+Double.toString(desiredLocation.getLongitude());
+            Intent intent = new Intent(Intent.ACTION_VIEW,  Uri.parse(uri));
+            startActivity(intent);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
 	
 	public void updateDesiredLocation() {
 		try { 
