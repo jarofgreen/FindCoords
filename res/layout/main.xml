@@ -13,7 +13,8 @@
         android:id="@+id/desiredLat"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"/>
+        android:background="@android:drawable/editbox_background"
+        android:inputType="number|numberSigned|numberDecimal" />
     
     <TextView
         android:layout_width="fill_parent"
@@ -24,7 +25,8 @@
         android:id="@+id/desiredLng"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"/>
+        android:background="@android:drawable/editbox_background"
+        android:inputType="number|numberSigned|numberDecimal" />
 
     <TextView
         android:layout_width="fill_parent"
