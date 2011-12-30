@@ -3,6 +3,7 @@ package uk.co.jarofgreen.FindCoords;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
@@ -88,13 +89,17 @@ public class MainActivity extends Activity {
 		tvCurrentBearing =  (TextView) findViewById(R.id.currentBearing);
 		
 		etDesiredLat = (EditText) findViewById(R.id.desiredLat);
+		etDesiredLng = (EditText) findViewById(R.id.desiredLng);
+
+		SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
+		etDesiredLat.setText(settings.getString("desiredLat",""));
+		etDesiredLng.setText(settings.getString("desiredLng",""));
+		
 		etDesiredLat.addTextChangedListener(new TextWatcher(){
 			public void afterTextChanged(Editable s) { updateDesiredLocation(); }
 			public void beforeTextChanged(CharSequence s, int start, int count, int after){}
 			public void onTextChanged(CharSequence s, int start, int before, int count){ updateDesiredLocation(); }
 		});
-		
-		etDesiredLng = (EditText) findViewById(R.id.desiredLng);
 		etDesiredLng.addTextChangedListener(new TextWatcher(){
 			public void afterTextChanged(Editable s) { updateDesiredLocation(); }
 			public void beforeTextChanged(CharSequence s, int start, int count, int after){}
@@ -117,7 +122,7 @@ public class MainActivity extends Activity {
 		compassImageWest = BitmapFactory.decodeResource(getResources(), R.drawable.compass_w);
 		compassImageSouth = BitmapFactory.decodeResource(getResources(), R.drawable.compass_s);
 		
-		update();
+		updateDesiredLocation(); // which in turn calls update();
 	}
 
     @Override
@@ -132,7 +137,17 @@ public class MainActivity extends Activity {
     protected void onStop() {
 		locationManager.removeUpdates(locationListener);
 		mSensorManager.unregisterListener(mListener);
+		
+		if (desiredLocation instanceof Location) {
+			SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putString("desiredLat", Double.toString(desiredLocation.getLatitude()));
+			editor.putString("desiredLng", Double.toString(desiredLocation.getLongitude()));
+			editor.commit();
+		}
+	      
 		super.onStop();
+		
     }
     	
     
