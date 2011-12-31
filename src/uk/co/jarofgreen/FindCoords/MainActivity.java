@@ -70,7 +70,8 @@ public class MainActivity extends Activity {
 	private Bitmap compassImageWest;
 	private Bitmap compassImageSouth;
 
-
+	static final int LOAD_LOCATION_REQUEST = 1;
+	static final int SAVE_LOCATION_REQUEST = 2;
 	
 	private SensorManager mSensorManager;
 	private Sensor mSensor;
@@ -204,11 +205,31 @@ public class MainActivity extends Activity {
         	Intent i = new Intent(this, AboutActivity.class);            	
         	startActivity(i);            
             return true;
+        case R.id.save_menu_item:
+        	startActivityForResult(new Intent(this,SaveActivity.class),SAVE_LOCATION_REQUEST);
+        	return true;
+        case R.id.load_menu_item:
+        	startActivityForResult(new Intent(this,LoadActivity.class),LOAD_LOCATION_REQUEST);
+        	return true;        	
         default:
             return super.onOptionsItemSelected(item);
         }
     }
 	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			if (requestCode == SAVE_LOCATION_REQUEST) {
+				
+			} else if (requestCode == LOAD_LOCATION_REQUEST) {
+				Bundle dataB = data.getExtras();
+				etDesiredLat.setText(Double.toString(dataB.getDouble("latitude")));
+				etDesiredLng.setText(Double.toString(dataB.getDouble("longitude")));
+				updateDesiredLocation();
+			}
+		}
+	}
+
+    
 	public void updateDesiredLocation() {
 		try { 
 			double lat = Double.parseDouble(etDesiredLat.getText().toString());

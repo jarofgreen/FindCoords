@@ -4,6 +4,10 @@
 		android:title="@string/map_menu_item" />
 	<item android:id="@+id/current_menu_item"
 		android:title="@string/current_menu_item" />
+	<item android:id="@+id/save_menu_item"
+		android:title="@string/save_menu_item" />
+	<item android:id="@+id/load_menu_item"
+		android:title="@string/load_menu_item" />		
 	<item android:id="@+id/about"
 		android:title="@string/about_menu" />	
 </menu>
