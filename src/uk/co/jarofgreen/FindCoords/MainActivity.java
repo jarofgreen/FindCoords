@@ -200,6 +200,10 @@ public class MainActivity extends Activity {
         		Toast.makeText(this, "Current Location Not Known", Toast.LENGTH_SHORT).show();
         	}
         	return true;
+        case R.id.about:
+        	Intent i = new Intent(this, AboutActivity.class);            	
+        	startActivity(i);            
+            return true;
         default:
             return super.onOptionsItemSelected(item);
         }

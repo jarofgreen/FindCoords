@@ -3,4 +3,18 @@
     <string name="app_name">FindCoords</string>
 	<string name="map_menu_item">Show On Map</string>
 	<string name="current_menu_item">Set to current location</string>
+	<string name="about_menu">About</string>
+	<string name="about_text">
+		More information and the source code is at https://github.com/jarofgreen/FindCoords
+		\n
+		\nPlease report problems at https://github.com/jarofgreen/FindCoords/issues
+		\n
+		\nCopyright &#169; 2011 James Baster
+		\n
+		\nOpen Source under the GPL License, Version 3. 
+		This program is distributed in the hope that it will be useful, but WITHOUT ANY 
+		WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+		PARTICULAR PURPOSE.  See the GNU General Public License at http://www.gnu.org/licenses/ for more details.
+	</string>
+	
 </resources>
