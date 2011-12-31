@@ -213,7 +213,9 @@ public class MainActivity extends Activity {
 		try { 
 			double lat = Double.parseDouble(etDesiredLat.getText().toString());
 			double lng = Double.parseDouble(etDesiredLng.getText().toString());
-			desiredLocation = new Location(LocationManager.GPS_PROVIDER);
+			if (!(desiredLocation instanceof Location)) {
+				desiredLocation = new Location(LocationManager.GPS_PROVIDER);
+			}
 			desiredLocation.setLatitude(lat);
 			desiredLocation.setLongitude(lng);			
 		} catch (NumberFormatException e) {
