@@ -206,7 +206,14 @@ public class MainActivity extends Activity {
         	startActivity(i);            
             return true;
         case R.id.save_menu_item:
-        	startActivityForResult(new Intent(this,SaveActivity.class),SAVE_LOCATION_REQUEST);
+        	if (desiredLocation instanceof Location) {
+	        	Intent i2 = new Intent(this,SaveActivity.class);
+	        	i2.putExtra("latitude", desiredLocation.getLatitude());
+	        	i2.putExtra("longitude", desiredLocation.getLongitude());
+	        	startActivityForResult(i2,SAVE_LOCATION_REQUEST);
+        	} else {
+        		Toast.makeText(this, "Desired Location Not Known", Toast.LENGTH_SHORT).show();
+        	}
         	return true;
         case R.id.load_menu_item:
         	startActivityForResult(new Intent(this,LoadActivity.class),LOAD_LOCATION_REQUEST);
