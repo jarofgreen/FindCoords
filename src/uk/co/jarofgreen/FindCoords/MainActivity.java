@@ -240,14 +240,14 @@ public class MainActivity extends Activity {
 			tvCurrentAccuracy.setText(Float.toString(currentAccuracy));
 			
 			if (desiredLocation instanceof Location) {
-						
-				float bearing = currentLocation.bearingTo(desiredLocation) ;
-				tvBearing.setText(Float.toString(bearing));
 
+				
+				
+				float bearing = currentLocation.bearingTo(desiredLocation) ;
 				float distance = currentLocation.distanceTo(desiredLocation);
-					
 				
 				if (distance > 1) {
+					tvBearing.setText(Float.toString(bearing));
 					tvDistance.setText(Float.toString(distance));
 					float bearingRelative = bearing - currentBearing;
 					while (bearingRelative < 0) bearingRelative =  bearingRelative + 360;
@@ -275,6 +275,7 @@ public class MainActivity extends Activity {
 						imgBearing.setVisibility(View.VISIBLE);
 					}
 				} else {
+					tvBearing.setText("");
 					tvDistance.setText("Less than 1");
 					imgBearing.setVisibility(View.INVISIBLE);
 				}
