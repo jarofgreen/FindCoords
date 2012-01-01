@@ -18,4 +18,8 @@
 	</string>
 	<string name="save_menu_item">Save Desired Location</string>
 	<string name="load_menu_item">Load Location</string>
+	<string name="ok">ok</string>
+	<string name="cancel">cancel</string>
+	<string name="enter_a_title">Enter a title:</string>
+	
 </resources>

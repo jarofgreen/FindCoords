@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
@@ -8,7 +8,7 @@
         android:id="@+id/label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Title here:"/>
+        android:text="@string/enter_a_title"/>
     <EditText
         android:id="@+id/entry"
         android:layout_width="fill_parent"
@@ -22,16 +22,16 @@
         android:layout_below="@id/entry"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dip"
-        android:text="OK" />
+        android:text="@string/ok" />
     <Button
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/cancel" 
         android:layout_toLeftOf="@id/ok"
         android:layout_alignTop="@id/ok"
-        android:text="Cancel" />
-    
+        />
 
-  </LinearLayout>
+  </RelativeLayout>
 
   
