@@ -168,6 +168,9 @@ public class MainActivity extends Activity {
 			editor.commit();
 		}
 	      
+		// We may get reloaded later ... but by then the current location is prob out of date.
+		currentLocation = null;
+		
 		super.onStop();
 		
     }
