@@ -22,4 +22,5 @@
 	<string name="cancel">cancel</string>
 	<string name="enter_a_title">Enter a title:</string>
 	<string name="open_loaded_from_context_menu">Open</string>
+	<string name="delete_loaded_from_context_menu">Delete</string>
 </resources>

@@ -21,6 +21,8 @@ import android.view.View;
 
 public class LoadActivity  extends ListActivity {
 
+	Cursor mCursor;
+	
 	@Override    
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class LoadActivity  extends ListActivity {
     	SQLiteDatabase db = loh.getReadableDatabase();
     	
     	final String fields[] = { BaseColumns._ID, "title", "lat", "lng" };
-    	Cursor mCursor =  db.query("locations", fields, null, null, null, null, null);
+    	mCursor =  db.query("locations", fields, null, null, null, null, null);
 		ListAdapter adapter = new SimpleCursorAdapter(
                 this, 
                 R.layout.load_item, 
@@ -70,15 +72,21 @@ public class LoadActivity  extends ListActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		LocationsOpenHelper loh;
 		switch (item.getItemId()) {
 		case R.id.open:
-			LocationsOpenHelper loh = new LocationsOpenHelper(getBaseContext());
+			loh = new LocationsOpenHelper(getBaseContext());
 			Double[] r = loh.getLatLngForId(info.id);
 			Intent result = new Intent();
 			result.putExtra("latitude",r[0]);
 			result.putExtra("longitude",r[1]);		
 			setResult(RESULT_OK, result);
 			finish();
+			return true;
+		case R.id.delete:
+			loh = new LocationsOpenHelper(getBaseContext());
+			loh.deleteId(info.id);
+			mCursor.requery();
 			return true;
 		default:
 			return super.onContextItemSelected(item);

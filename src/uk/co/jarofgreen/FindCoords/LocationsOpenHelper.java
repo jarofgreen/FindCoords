@@ -42,6 +42,11 @@ public class LocationsOpenHelper extends SQLiteOpenHelper {
 		Double[] r = { c.getDouble(0), c.getDouble(1) };
 		return r;		
 	}
+	
+	public void deleteId(long id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(LOCATIONS_TABLE_NAME, BaseColumns._ID+"="+Long.toString(id),null);	
+	}
 }
 	
 
