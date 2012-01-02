@@ -97,7 +97,10 @@ public class MainActivity extends Activity {
 		
 		public void onProviderEnabled(String provider) {}
 		
-		public void onProviderDisabled(String provider) {}
+		public void onProviderDisabled(String provider) {
+			// current location will go out of date soon, so stop showing it now.
+			currentLocation = null;
+		}
 	};
 	
 	@Override
