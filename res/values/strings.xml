@@ -21,5 +21,5 @@
 	<string name="ok">ok</string>
 	<string name="cancel">cancel</string>
 	<string name="enter_a_title">Enter a title:</string>
-	
+	<string name="open_loaded_from_context_menu">Open</string>
 </resources>

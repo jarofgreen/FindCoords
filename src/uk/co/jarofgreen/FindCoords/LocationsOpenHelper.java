@@ -1,6 +1,7 @@
 package uk.co.jarofgreen.FindCoords;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -32,6 +33,14 @@ public class LocationsOpenHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		
 		
+	}
+	
+	public Double[] getLatLngForId(long id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		SQLiteCursor c = (SQLiteCursor) db.rawQuery("SELECT lat,lng FROM locations WHERE "+BaseColumns._ID+"="+Long.toString(id), null);
+		c.moveToFirst();
+		Double[] r = { c.getDouble(0), c.getDouble(1) };
+		return r;		
 	}
 }
 	
